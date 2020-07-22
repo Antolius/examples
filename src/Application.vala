@@ -28,15 +28,20 @@ public class MyApp : Gtk.Application {
     }
 
     protected override void activate () {
-        var label = new Gtk.Label ("Hello Again World!");
+        var switch = new Gtk.Switch () {
+            halign = Gtk.Align.CENTER,
+            valign = Gtk.Align.CENTER
+        };
 
         var main_window = new Gtk.ApplicationWindow (this) {
             default_height = 300,
-            default_width = 300,
-            title = "Hello World"
+            default_width = 300
         };
-        main_window.add (label);
+        main_window.add (switch);
         main_window.show_all ();
+
+        var settings = new GLib.Settings ("com.github.yourusername.yourrepositoryname");
+        settings.bind ("useless-setting", switch, "active", GLib.SettingsBindFlags.DEFAULT);
     }
 
     public static int main (string[] args) {

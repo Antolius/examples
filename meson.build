@@ -11,16 +11,6 @@ executable(
     install: true
 )
 
-# Install our .desktop file so the Applications Menu will see it
-install_data(
-    join_paths('data', 'hello-again.desktop'),
-    install_dir: join_paths(get_option('datadir'), 'applications'),
-    rename: meson.project_name() + '.desktop'
-)
+meson.add_install_script('meson/post_install.py')
 
-# Install our .appdata.xml file so AppCenter will see it
-install_data(
-    join_paths('data', 'hello-again.appdata.xml'),
-    install_dir: join_paths(get_option('datadir'), 'metainfo'),
-    rename: meson.project_name() + '.appdata.xml'
-)
+subdir('data')
